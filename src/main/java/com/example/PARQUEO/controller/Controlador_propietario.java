@@ -1,4 +1,4 @@
 package com.example.PARQUEO.controller;
 
-public class Controlador {
+public class Controlador_propietario {
 }
