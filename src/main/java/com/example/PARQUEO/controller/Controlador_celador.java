@@ -3,29 +3,25 @@ package com.example.PARQUEO.controller;
 import com.example.PARQUEO.Model.Celador;
 import com.example.PARQUEO.impservice.ICeladorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Controller
+@RequestMapping
 public class Controlador_celador {
 
     @Autowired
     private ICeladorService servcelador;
 
     @GetMapping("/celador")
-    public String listar(Model model){
+    public String celador(Model model){
         model.addAttribute("titulo_celador","CELADORES");
         model.addAttribute("cuerpo_celador","Proveedores");
-
         List<Celador> cela = servcelador.listar_celador();
-
-
         model.addAttribute("datos_celador",cela);
-        return "celador";
+        return "GestCelador";
     }
 
     @GetMapping("/nuevo_celador")
@@ -35,7 +31,7 @@ public class Controlador_celador {
         model.addAttribute("cuerpo_nuevo_celador","GUARDA NUEVO");
         model.addAttribute("celador",new Celador());
 
-        return "nuevo_celador";
+        return "Registrar_Celador";
     }
 
     @PostMapping("/guardar_celador")
@@ -52,7 +48,7 @@ public class Controlador_celador {
 
         model.addAttribute("celador",servcelador.editar_celador(id));
 
-        return "nuevo_celador";
+        return "Registrar_Celador";
     }
 
     @GetMapping("/eliminar_celador/{id}")
