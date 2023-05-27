@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${titulo_nuevo_provee}"></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+</head>
+<style>
+
+body{
+      background: linear-gradient(to bottom, #000000, #07330a);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+}
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">AGREGAR NUEVO PROPIETARIO</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="@{/propietarios}">VOLVER</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h3 class="card-title text-center">NUEVO PROPIETARIO</h3>
+        </div>
+        <div class="card-body">
+          <form th:action="@{/guardar_propietario}" th:object="${propietario}" method="post">
+            <input type="hidden" th:field="*{id_propietario}">
+            <div class="mb-3">
+              <label class="form-label">Nombre</label>
+              <input class="form-control" type="text" th:field="*{nombre}" name="nombre" placeholder="Ingrese nombre del propietario" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Apellido</label>
+              <input class="form-control" type="text" th:field="*{apellido}" name="apellido" placeholder="Ingrese apellido del propietario" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Apartamento</label>
+              <input class="form-control" type="text" th:field="*{apartamento}" name="apartamento" placeholder="Ingrese apartamento del propietario" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Torre</label>
+              <input class="form-control" type="text" th:field="*{torre}" name="torre" placeholder="Ingrese torre del propietario" required>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-success" type="submit">Guardar</button>
+              <a class="btn btn-secondary" href="@{/propietarios}">REGRESAR</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

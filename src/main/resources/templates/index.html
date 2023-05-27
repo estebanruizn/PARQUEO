@@ -4,110 +4,50 @@
     <meta charset="UTF-8">
     <title>Sistema de Control de Acceso de Vehículos Visitantes - Conjunto Residencial</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <style>
-        body {
-            background: linear-gradient(to bottom, #000000, #07330a);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            color: #ffffff;
-            overflow-y: hidden; /* Evita el scroll vertical */
-        }
-
-        .container {
-            margin-top: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        h1 {
-            margin-bottom: 30px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .btn-group {
-            margin-top: 20px;
-        }
-
-        .btn {
-            border-radius: 50px;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            margin-right: 10px;
-            text-transform: uppercase;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover,
-        .btn-primary:focus {
-            background-color: #0069d9;
-            border-color: #0062cc;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-        .btn-danger:hover,
-        .btn-danger:focus {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
-        }
-
-        .btn-success:hover,
-        .btn-success:focus {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-
-        .btn-secondary:hover,
-        .btn-secondary:focus {
-            background-color: #5a6268;
-            border-color: #545b62;
-        }
-
-        .logo {
-            width: 250px;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <div class="container">
-    <img src="https://colviviendabroker.com/wp-content/uploads/2017/10/Logo-bambu-350x350.png" alt="Logo conjunto residencial" class="logo">
+    <img src="../static/banbu.png" alt="Logo conjunto residencial" class="logo">
     <h1>Sistema de Control de Acceso de Vehículos Visitantes</h1>
+    <div class="current-time">
+        <span id="current-time"></span>
+    </div>
+    <div class="current-date">
+        <span id="current-date"></span>
+    </div>
     <div class="btn-group" role="group" aria-label="Acciones">
-        <button type="button" class="btn btn-primary">Agregar y eliminar propietario</button>
+        <a th:href="@{/admin}"  type="button" class="btn btn-primary">Agregar y eliminar propietario</a>
         <button type="button" class="btn btn-danger">Salida de Vehículo</button>
-        <button type="button" class="btn btn-success">Entrada de Vehículo</button>
+        <a th:href="@{/elegir}" type="button" class="btn btn-success">Entrada de Vehículo</a>
         <button type="button" class="btn btn-secondary">Agregar y eliminar guarda</button>
     </div>
-</div>
 
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    function updateTime() {
+        var now = new Date();
+        var timeElement = document.getElementById('current-time');
+        var options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        var timeString = now.toLocaleTimeString('en-US', options);
+        timeElement.innerText = timeString;
+
+        setTimeout(updateTime, 1000);
+    }
+
+    function updateDate() {
+        var now = new Date();
+        var dateElement = document.getElementById('current-date');
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        var dateString = now.toLocaleDateString('es-ES', options);
+        dateElement.innerText = dateString;
+    }
+
+    updateTime();
+    updateDate();
+</script>
 </body>
 </html>

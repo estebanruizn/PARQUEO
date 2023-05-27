@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo_propietarios}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    body {
+      background: linear-gradient(to bottom, #000000, #07330a);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .navbar-brand {
+      color: white !important;
+      font-weight: bold;
+    }
+
+    .table-container {
+      margin-top: 20px;
+    }
+
+    .personas-table th,
+    .personas-table td {
+      vertical-align: middle;
+    }
+
+    .eliminar {
+      font-size: 14px;
+    }
+
+    .nueva-persona-btn {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">PROPIETARIOS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" id="table-search" placeholder="Buscar"
+                               aria-label="Buscar">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="container-fluid">
+    <div class="table-container">
+        <h3 class="text-white" th:text="${cuerpo_propietarios}">Lista de Propietarios</h3>
+        <div class="form-group text-center">
+            <a class="btn btn-success nueva-persona-btn" th:href="@{/nuevo_propietario}">GUARDAR NUEVO PROPIETARIO</a>
+        </div>
+        <table class="table table-striped table-light personas-table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Código</th>
+                <th>Apartamento</th>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>Torre</th>
+                <th>Visitante</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody id="table-body" th:each="templist: ${datos_propietarios}">
+            <tr>
+                <td th:text="${templist.id_propietario}"></td>
+                <td th:text="${templist.apartamento}"></td>
+                <td th:text="${templist.apellido}"></td>
+                <td th:text="${templist.nombre}"></td>
+                <td th:text="${templist.torre}"></td>
+                <td th:text="${templist.id_visitante}"></td>
+                <td>
+                    <a class="btn btn-outline-danger eliminar"
+                       th:href="@{/eliminar_propietario/} + ${templist.id_propietario}">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+            $(document).ready(function() {
+              $('#table-search').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('#table-body tr').filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+          </script>
+</body>
+</html>

@@ -16,5 +16,5 @@ public class Propietario {
     private String torre;
     @ManyToOne
     @JoinColumn(name = "id_visitante")
-    private Visitante id_visitante;
+    public Visitante id_visitante;
 }

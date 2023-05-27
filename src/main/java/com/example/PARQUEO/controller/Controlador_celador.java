@@ -3,14 +3,14 @@ package com.example.PARQUEO.controller;
 import com.example.PARQUEO.Model.Celador;
 import com.example.PARQUEO.impservice.ICeladorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Controller
+@RequestMapping
 public class Controlador_celador {
 
     @Autowired

@@ -44,14 +44,14 @@ public class Controlador_propietario {
 
         servpropietario.guardar_propietario(provee);
 
-        return "redirect:/propietario";
+        return "redirect:/propietarios";
     }
 
     @GetMapping("/eliminar_propietario/{id}")
     public String eliminarPropietario(@PathVariable("id") int id, Model model){
 
         servpropietario.eliminar_propietario(id);
-        return "redirect:/propietario";
+        return "redirect:/propietarios";
     }
 
     @GetMapping("/editar_propietario/{id}")
