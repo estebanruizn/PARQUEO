@@ -17,7 +17,7 @@ public class Controlador_admin {
 
     @Autowired
     private IAdminService servadmin;
-
+    //Credenciales para ingreso ADMIN Propietarios
     @GetMapping("/admin")
     public String listar(Model model){
         model.addAttribute("titulo_celador","ADMIN");
@@ -38,6 +38,29 @@ public class Controlador_admin {
             // Credenciales inválidas, mostrar mensaje de error
             model.addAttribute("error", "Contraseña incorrecta");
             return "admin"; // Renderizar directamente la vista del inicio de sesión
+        }
+    }
+    //Credenciales para ingreso ADMIN celadores
+    @GetMapping("/admincel")
+    public String listar2(Model model){
+        model.addAttribute("titulo_celador","ADMIN");
+        model.addAttribute("cuerpo_celador","Admin");
+
+        List<Admin> admin = servadmin.lis();
+
+
+        model.addAttribute("datos_admin",admin);
+        return "admincel";
+    }
+    @PostMapping("/access2")
+    public String iniciarSesion2(@RequestParam int password, Model model) {
+        if (password == 123456) {
+            // Credenciales válidas, iniciar sesión exitosamente
+            return "redirect:/celador"; // Redirigir a la página de inicio del sistema
+        } else {
+            // Credenciales inválidas, mostrar mensaje de error
+            model.addAttribute("error", "Contraseña incorrecta");
+            return "admincel"; // Renderizar directamente la vista del inicio de sesión
         }
     }
 }
