@@ -2,203 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registro de Vehículos</title>
+    <title>Acceso al sistema</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            background: linear-gradient(to bottom, #000000, #07330a);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: Arial, sans-serif;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #000000, #07330a);
+      padding: 20px;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-        h1 {
-            text-align: center;
-            color: #fff;
-        }
+    h1 {
+      text-align: center;
+      color: #000;
+      margin-bottom: 30px;
+    }
 
-        .form-section {
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
+    label {
+      color: #000;
+      font-weight: bold;
+    }
 
-        .vehicle-details {
-            margin-bottom: 20px;
-        }
+    .form-control {
+      border-color: #004445;
+    }
 
-        .parking-lots {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+    .btn-primary,
+    .btn-secondary {
+      background-color: #004445;
+      border-color: #004445;
+      width: 48%;
+      margin-top: 10px;
+    }
 
-        .parking-lot {
-            width: 80px;
-            height: 80px;
-            background-color: #ccc;
-            border: 1px solid #888;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 5px;
-            color: #000;
-            transition: background-color 0.3s ease;
-        }
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      background-color: #002f2f;
+      border-color: #002f2f;
+    }
 
-        .parking-lot.selected {
-            background-color: #28a745;
-            color: #fff;
-        }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
 
-        .parking-lot.disabled {
-            background-color: #f2f2f2;
-            color: #888;
-            cursor: not-allowed;
-        }
+    .logo {
+      width: 200px;
+      height: auto;
+    }
 
-        .parking-lot.disabled:hover {
-            background-color: #f2f2f2;
-            color: #888;
-        }
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
 
-        .submit-button {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .form-label {
-            color: #000;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #888;
-            background-color: #f2f2f2;
-            color: #000;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #218838;
-        }
+    #errorLabel {
+      color: red;
+    }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Registro de Vehículos</h1>
-
-    <div class="form-section">
-        <h3 style="color: #000;">Datos del Visitante</h3>
-        <form id="vehicle-form">
-            <div style="margin-bottom: 10px;">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" id="nombre" name="name" class="form-control" required>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <label for="apellido" class="form-label">Apellido:</label>
-                <input type="text" id="apellido" name="details" class="form-control" required>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <label for="numdoc" class="form-label">Numero de documento:</label>
-                <input type="text" id="numdoc" name="details" class="form-control" required>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <label for="tipvehiculo" class="form-label">Tipo de Vehículo:</label>
-                <select id="tipvehiculo" name="tipvehiculo" class="form-control" required>
-                    <option value="carro">Carro</option>
-                    <option value="moto">Moto</option>
-                </select>
-            </div>
-
-        </form>
-    </div>
-
-    <div class="form-section">
-        <h3 style="color: #000;">Asignar Parqueadero</h3>
-        <div class="parking-lots">
-            <div class="parking-lot" data-parking-lot="1">1</div>
-            <div class="parking-lot" data-parking-lot="2">2</div>
-            <div class="parking-lot" data-parking-lot="3">3</div>
-            <div class="parking-lot" data-parking-lot="4">4</div>
-            <div class="parking-lot" data-parking-lot="5">5</div>
-            <div class="parking-lot" data-parking-lot="6">6</div>
-            <div class="parking-lot" data-parking-lot="7">7</div>
-            <div class="parking-lot" data-parking-lot="8">8</div>
-            <div class="parking-lot" data-parking-lot="9">9</div>
-            <div class="parking-lot" data-parking-lot="10">10</div>
-            <div class="parking-lot" data-parking-lot="11">11</div>
-            <div class="parking-lot" data-parking-lot="12">12</div>
-            <div class="parking-lot" data-parking-lot="13">13</div>
-            <div class="parking-lot" data-parking-lot="14">14</div>
-            <div class="parking-lot" data-parking-lot="15">15</div>
-            <div class="parking-lot" data-parking-lot="16">16</div>
-            <!-- Agrega más números de parqueaderos aquí -->
-        </div>
-    </div>
-
-    <div class="submit-button">
-        <button type="button" id="submit-btn" class="btn-success">Guardar</button>
-    </div>
+<div class="center">
+    <img src="../static/banbu.png" alt="Logo" class="logo">
 </div>
+<div class="container">
+    <h1>Acceso al sistema</h1>
+    <form id="access-form" action="/access2" method="post">
+        <div class="form-group">
+            <label for="color">Color:</label>
+            <input type="text" id="color" class="form-control" name="color" required>
+        </div>
+        <div class="form-group">
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" class="form-control" name="modelo" required>
+        </div>
+        <div class="form-group">
+            <label for="placa">Placa:</label>
+            <input type="text" id="placa" class="form-control" name="placa" required>
+        </div>
+        <div class="form-group">
+            <label for="celador">Celador:</label>
+            <select id="celador" class="form-control" name="celador" required>
+                <!-- Aquí debes agregar el código para obtener la información de la base de datos y generar las opciones del select -->
+                <!-- Puedes utilizar Spring Boot y Thymeleaf para obtener la información del controlador y pasarla al HTML -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tipo_vehiculo">Tipo de vehículo:</label>
+            <select id="tipo_vehiculo" class="form-control" name="tipo_vehiculo" required>
+                <!-- Aquí debes agregar el código para obtener la información de la base de datos y generar las opciones del select -->
+                <!-- Puedes utilizar Spring Boot y Thymeleaf para obtener la información del controlador y pasarla al HTML -->
+            </select>
+        </div>
+        <label id="errorLabel"></label>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Acceder</button>
+            <button onclick="window.history.back()" class="btn btn-secondary">Retroceder</button>
+        </div>
+    </form>
 
-<script>
-        const parkingLots = document.querySelectorAll('.parking-lot');
-        const submitButton = document.getElementById('submit-btn');
-
-        parkingLots.forEach(parkingLot => {
-            parkingLot.addEventListener('click', () => {
-                if (parkingLot.classList.contains('selected')) {
-                    parkingLot.classList.remove('selected');
-                } else {
-                    parkingLot.classList.add('selected');
-                }
-            });
-        });
-
-        submitButton.addEventListener('click', () => {
-            const selectedParkingLots = document.querySelectorAll('.parking-lot.selected');
-            const formData = new FormData(document.getElementById('vehicle-form'));
-            const visitorName = formData.get('name');
-            const vehicleDetails = formData.get('details');
-            const assignedParkingLots = [];
-
-            selectedParkingLots.forEach(parkingLot => {
-                assignedParkingLots.push(parkingLot.getAttribute('data-parking-lot'));
-            });
-
-            // Aquí puedes hacer la llamada a tu API o procesar los datos según tus necesidades
-            console.log('Nombre del visitante:', visitorName);
-            console.log('Detalles del vehículo:', vehicleDetails);
-            console.log('Parqueaderos asignados:', assignedParkingLots);
-        });
-    </script>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-

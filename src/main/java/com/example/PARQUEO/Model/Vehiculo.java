@@ -16,7 +16,6 @@ public class Vehiculo {
     @ManyToOne
     @JoinColumn(name = "id_tiempo")
     private Tiempo id_tiempo;
-    private String parqueadero_asignado;
     @ManyToOne
     @JoinColumn(name = "id_lugar")
     private Lugar id_lugar;

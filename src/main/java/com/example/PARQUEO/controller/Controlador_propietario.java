@@ -47,6 +47,7 @@ public class Controlador_propietario {
         return "redirect:/propietarios";
     }
 
+
     @GetMapping("/eliminar_propietario/{id}")
     public String eliminarPropietario(@PathVariable("id") int id, Model model){
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Acceso al sistema</title>
@@ -80,12 +80,12 @@
       <label for="password">Digite la contraseña de administrador para poder ingresar:</label>
       <input type="password" id="password" class="form-control" name="password" required>
     </div>
-    <label id="errorLabel" style="color: red;"></label>
     <div class="button-container">
       <button type="submit" class="btn btn-primary">Acceder</button>
       <button onclick="window.history.back()" class="btn btn-secondary">Retroceder</button>
     </div>
   </form>
+  <label id="errorLabel" style="color: red;" th:text="${#strings.escapeXml(error)}"></label>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -17,12 +17,14 @@ public class Controlador_celador {
 
     @GetMapping("/celador")
     public String celador(Model model){
-        model.addAttribute("titulo_celador","CELADORES");
-        model.addAttribute("cuerpo_celador","Proveedores");
+        model.addAttribute("titulo_celador", "CELADORES");
+        model.addAttribute("cuerpo_celador", "Proveedores");
         List<Celador> cela = servcelador.listar_celador();
-        model.addAttribute("datos_celador",cela);
+        model.addAttribute("datos_celador", cela);
         return "GestCelador";
     }
+
+
 
     @GetMapping("/nuevo_celador")
     public String AgregarCelador(Model model){

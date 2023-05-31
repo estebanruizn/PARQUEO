@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IPropietarioService {
+
     public List<Propietario> listar_propietario();
     public Optional<Propietario> editar_propietario(int id);
     public void guardar_propietario(Propietario propietario);

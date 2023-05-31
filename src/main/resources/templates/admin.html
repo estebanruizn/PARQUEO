@@ -81,16 +81,12 @@
       <label for="password">Digite la contraseña de administrador para poder ingresar:</label>
       <input type="password" id="password" class="form-control" name="password" required>
     </div>
-    <label id="errorLabel" style="color: red;"></label>
     <div class="button-container">
       <button type="submit" class="btn btn-primary">Acceder</button>
       <button onclick="window.history.back()" class="btn btn-secondary">Retroceder</button>
     </div>
   </form>
-
-  <div class="text-center">
-    <a class="btn btn-secondary mb-3" th:href="@{/}">REGRESAR</a>
-  </div>
+  <label id="errorLabel" style="color: red;" th:text="${error}"></label>
 </div>
 
 

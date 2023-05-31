@@ -67,26 +67,22 @@
         <table class="table table-striped table-light personas-table">
             <thead class="thead-dark">
             <tr>
-                <th>Código</th>
-                <th>Apartamento</th>
-                <th>Apellido</th>
                 <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Apartamento</th>
                 <th>Torre</th>
-                <th>Visitante</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody id="table-body" th:each="templist: ${datos_propietarios}">
             <tr>
-                <td th:text="${templist.id_propietario}"></td>
-                <td th:text="${templist.apartamento}"></td>
-                <td th:text="${templist.apellido}"></td>
                 <td th:text="${templist.nombre}"></td>
+                <td th:text="${templist.apellido}"></td>
+                <td th:text="${templist.apartamento}"></td>
                 <td th:text="${templist.torre}"></td>
-                <td th:text="${templist.id_visitante}"></td>
                 <td>
-                    <a class="btn btn-outline-danger eliminar"
-                       th:href="@{/eliminar_propietario/} + ${templist.id_propietario}">Eliminar</a>
+                    <a class="btn btn-outline-warning editar"
+                       th:href="@{/editar_propietario/} + ${templist.id_propietario}">EDITAR</a>
                 </td>
             </tr>
             </tbody>
