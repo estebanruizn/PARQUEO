@@ -16,6 +16,7 @@
         background-color: green;
     }
 
+
     .seat.occupied {
         background-color: red;
     }
@@ -223,12 +224,15 @@
                 </div>
                 <label id="errorLabel"></label>
                 <div class="button-container">
-                    <button type="submit" class="btn btn-primary">Acceder</button>
+                    <button type="submit" id="btnAcceder" class="btn btn-primary">Acceder</button>
                     <button onclick="window.history.back()" class="btn btn-secondary">Retroceder</button>
                 </div>
+
             </form>
         </div>
     </div>
+
+
     <div class="row">
         <div class="col-md-4 schedule-column">
             <h2 class="schedule-title">Bicicletas</h2>
@@ -257,9 +261,24 @@
     </div>
 
     <div class="center">
-        <button type="button" class="btn btn-primary">Asignar puesto</button>
-        <button type="button" class="btn btn-primary">Salida vehiculo</button>
+        <button type="button" id="btnAsignarPuesto" class="btn btn-primary">Asignar puesto</button>
+        <button type="button" id="salidaVehiculoBtn" class="btn btn-primary">Salida vehiculo</button>
     </div>
+    <script>
+    document.getElementById("btnAsignarPuesto").addEventListener("click", function() {
+        // Obtener los lugares disponibles para asignar
+        var lugaresDisponibles = document.getElementsByClassName("seat");
+        // Generar un índice aleatorio para seleccionar un lugar
+        var indiceAleatorio = Math.floor(Math.random() * lugaresDisponibles.length);
+        // Obtener el lugar asignado
+        var lugarAsignado = lugaresDisponibles[indiceAleatorio].innerText;
+        // Asignar el lugar al campo correspondiente
+        document.getElementById("lugar").value = lugarAsignado;
+    });
+</script>
+
+
+
 
     <script>
     // Obtener todos los elementos con la clase "seat"
@@ -276,6 +295,7 @@
         }
     });
 </script>
+
 
 </div>
 

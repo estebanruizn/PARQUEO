@@ -62,4 +62,5 @@ public class Controlador_visitante {
         servvisit.eliminar_visitante(id);
         return "redirect:/visitante";
     }
+
 }

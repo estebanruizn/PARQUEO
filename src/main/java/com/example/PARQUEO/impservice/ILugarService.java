@@ -11,4 +11,5 @@ public interface ILugarService {
     public Optional<Lugar> editar_lugar(int id);
     public void guardar_lugar(Lugar lugar);
     public void eliminar_lugar(int id);
+
 }
