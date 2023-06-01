@@ -25,8 +25,9 @@ public class VehiculoService implements IVehiculoService {
     }
 
     @Override
-    public void guardar_vehiculo(Vehiculo vehiculo) {
+    public Vehiculo guardar_vehiculo(Vehiculo vehiculo) {
         data.save(vehiculo);
+        return vehiculo;
     }
 
     @Override

@@ -25,8 +25,9 @@ public class VisitanteService implements IVisitanteService {
     }
 
     @Override
-    public void guardar_visitante(Visitante visitante) {
+    public Visitante guardar_visitante(Visitante visitante) {
         data.save(visitante);
+        return visitante;
     }
 
     @Override

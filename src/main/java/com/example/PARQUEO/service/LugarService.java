@@ -25,8 +25,9 @@ public class LugarService implements ILugarService {
     }
 
     @Override
-    public void guardar_lugar(Lugar lugar) {
+    public Lugar guardar_lugar(Lugar lugar) {
         data.save(lugar);
+        return lugar;
     }
 
     @Override

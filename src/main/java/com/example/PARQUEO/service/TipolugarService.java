@@ -25,8 +25,9 @@ public class TipolugarService implements ITipolugarService {
     }
 
     @Override
-    public void guardar_tipolugar(Tipo_lugar tipo_lugar) {
+    public Tipo_lugar guardar_tipolugar(Tipo_lugar tipo_lugar) {
         data.save(tipo_lugar);
+        return tipo_lugar;
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface IVisitanteService {
     public List<Visitante> listar_visitante();
     public Optional<Visitante> editar_visitante(int id);
-    public void guardar_visitante(Visitante visitante);
+    public Visitante guardar_visitante(Visitante visitante);
     public void eliminar_visitante(int id);
 
 }
