@@ -15,6 +15,11 @@ public class PropietarioService implements IPropietarioService {
     private IPropietario data;
 
     @Override
+    public List<Propietario> buscarPorTorreYApartamento(String torre, String apartamento) {
+        return null;
+    }
+
+    @Override
     public List<Propietario> listar_propietario() {
         return data.findAll();
     }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo_vehiculos}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom, #000000, #07330a);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav-link {
+            font-size: 1.2rem;
+        }
+        .personas-container {
+            margin-top: 3rem;
+        }
+        .personas-table th {
+            font-weight: bold;
+        }
+        .eliminar, .editar {
+            font-size: 0.9rem;
+        }
+        .nueva-persona-btn {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand">REGISTRO VEHICULOS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</header>
+
+<main role="main" class="container">
+    <div class="personas-container">
+        <h3 class="text-white" th:text="${cuerpo_vehiculos}"></h3>
+        <table class="table table-striped table-light personas-table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Color</th>
+                <th>Placa</th>
+                <th>ID Lugar</th>
+                <th>Modelo</th>
+                <th>ID Tiempo</th>
+                <th>ID Tipo Vehiculo</th>
+                <th>ID Celador</th>
+                <th>Tipo de Vehiculo</th>
+            </tr>
+            </thead>
+            <tbody th:each="templist: ${datos_vehiculo}">
+            <tr>
+                <td th:text="${templist.color}"></td>
+                <td th:text="${templist.placa}"></td>
+                <td th:text="${templist.id_lugar}"></td>
+                <td th:text="${templist.modelo}"></td>
+                <td th:text="${templist.id_tiempo}"></td>
+                <td th:text="${templist.id_tipovehiculo}"></td>
+                <td th:text="${templist.id_celador}"></td>
+                <td th:text="${templist.tipoVehiculo}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

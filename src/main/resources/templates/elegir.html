@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Asignación de Parqueadero</title>
@@ -61,17 +61,16 @@
             height: auto;
         }
 
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2px;
-}
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2px;
+        }
 
-.button-container button {
-  font-size: 14px;
-  margin-right: 10px; /* Margen a la derecha entre los botones */
-}
-
+        .button-container button {
+            font-size: 14px;
+            margin-right: 10px;
+        }
 
         #errorLabel {
             color: red;
@@ -110,6 +109,21 @@
             margin-bottom: 30px;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#verificar').click(function() {
+                var torre = $('#torre').val();
+                var apartamento = $('#apa').val();
+
+                // Realizar la solicitud AJAX al controlador para obtener los datos del propietario
+                $.get("/consultar-propietario", { torre: torre, apartamento: apartamento }, function(data) {
+                    $('#nombrep').val(data.nombre);
+                    $('#apellidop').val(data.apellido);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="center">
@@ -119,7 +133,7 @@
     <h1>Asignación de Parqueadero</h1>
     <div class="row">
         <div class="col-md-4">
-            <label for="nombre">Datos propietario:</label>
+            <h2>Datos propietario:</h2>
             <div class="form-group">
                 <label for="torre">Torre:</label>
                 <input type="text" id="torre" class="form-control" name="torre" required>
@@ -130,20 +144,20 @@
             </div>
             <div class="form-group">
                 <label for="nombrep">Nombre:</label>
-                <input type="text" id="nombrep" class="form-control" name="nombre" required>
+                <input type="text" id="nombrep" class="form-control" name="nombre" required readonly>
             </div>
             <div class="form-group">
                 <label for="apellidop">Apellido:</label>
-                <input type="text" id="apellidop" class="form-control" name="apellido" required>
+                <input type="text" id="apellidop" class="form-control" name="apellido" required readonly>
             </div>
             <div class="form-group">
                 <label for="verificarr">Verificar propietario:</label>
-                <input type="submit" id="boton" class="form-control" name="verificar" value="Verificar" required>
+                <input type="button" id="verificar" class="form-control" name="verificar" value="Verificar" required>
             </div>
         </div>
 
         <div class="col-md-4">
-            <label for="nombre">Datos visitante:</label>
+            <h2>Datos visitante:</h2>
             <div class="form-group">
                 <label for="nombrev">Nombre:</label>
                 <input type="text" id="nombrev" class="form-control" name="nombre" required>
@@ -160,7 +174,7 @@
 
         <div class="col-md-4">
             <form id="access-form" action="/access2" method="post">
-                <label for="color">Datos vehiculo:</label>
+                <h2>Datos vehiculo:</h2>
                 <div class="form-group">
                     <label for="color">Color:</label>
                     <input type="text" id="color" class="form-control" name="color" required>
@@ -173,7 +187,6 @@
                     <label for="placa">Placa:</label>
                     <input type="text" id="placa" class="form-control" name="placa" required>
                 </div>
-
                 <div class="form-group">
                     <label for="celador">Celador:</label>
                     <select id="celador" class="form-control" name="celador" required>
@@ -181,7 +194,6 @@
                         <option th:each="celador : ${datos_celador}" th:value="${celador.id_celador}" th:text="${celador.apellido}"></option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="tipo_vehiculo">Tipo de vehículo:</label>
                     <select id="tipo_vehiculo" class="form-control" name="tipo_vehiculo" required>
@@ -191,19 +203,16 @@
                 </div>
                 <div class="form-group">
                     <label for="lugar">Lugar:</label>
-                    <input type="text" id="lugar" class="form-control" name="lugar" required>
+                    <input type="text" id="lugar" class="form-control" name="lugar" readonly>
                 </div>
                 <label id="errorLabel"></label>
                 <div class="button-container">
                     <button type="submit" class="btn btn-primary">Acceder</button>
                     <button onclick="window.history.back()" class="btn btn-secondary">Retroceder</button>
-                    <button type="submit" class="btn btn-primary">Generar puesto</button>
-
                 </div>
             </form>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-4 schedule-column">
             <h2 class="schedule-title">Bicicletas</h2>
@@ -213,7 +222,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 schedule-column">
             <h2 class="schedule-title">Carros</h2>
             <div class="schedule-seats">
@@ -222,7 +230,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 schedule-column">
             <h2 class="schedule-title">Motos</h2>
             <div class="schedule-seats">
@@ -231,6 +238,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="center">
+        <button type="submit" class="btn btn-primary">Generar puesto</button>
     </div>
 </div>
 </body>
