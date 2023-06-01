@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Asignación de Parqueadero</title>
@@ -127,28 +128,49 @@
     <h1>Asignación de Parqueadero</h1>
     <div class="row">
         <div class="col-md-4">
-            <h2>Datos propietario:</h2>
-            <div class="form-group">
-                <label for="torre">Torre:</label>
-                <input type="text" id="torre" class="form-control" name="torre" required>
-            </div>
-            <div class="form-group">
-                <label for="apa">Apartamento:</label>
-                <input type="text" id="apa" class="form-control" name="apa" required>
-            </div>
-            <div class="form-group">
-                <label for="nombrep">Nombre:</label>
-                <input type="text" id="nombrep" class="form-control" name="nombre" required readonly>
-            </div>
-            <div class="form-group">
-                <label for="apellidop">Apellido:</label>
-                <input type="text" id="apellidop" class="form-control" name="apellido" required readonly>
-            </div>
-            <div class="form-group">
-                <label for="verificarr">Verificar propietario:</label>
-                <input type="submit" id="boton" class="form-control" name="verificar" value="Verificar" required>
-            </div>
+                <h2>Datos propietario:</h2>
+                <div class="form-group">
+                    <label for="torre">Torre:</label>
+                    <input type="text" id="torre" class="form-control" name="torre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apa">Apartamento:</label>
+                    <input type="text" id="apa" class="form-control" name="apartamento" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombrep">Nombre:</label>
+                    <input type="text" id="nombrep" class="form-control" name="nombre" required readonly>
+                </div>
+                <div class="form-group">
+                    <label for="apellidop">Apellido:</label>
+                    <input type="text" id="apellidop" class="form-control" name="apellido" required readonly>
+                </div>
+                <div class="form-group">
+                    <input type="submit" id="verificar" class="form-control" name="verificar" value="Verificar" required>
+                </div>
         </div>
+        <script>
+        $(document).ready(function() {
+            $('#verificar').click(function() {
+                var torre = $('#torre').val();
+                var apartamento = $('#apa').val();
+
+                $.ajax({
+                    url: '/datos_propietario/' + torre + '/' + apartamento,
+                    type: 'GET',
+                    success: function(response) {
+                        $('#nombrep').val(response.nombre);
+                        $('#apellidop').val(response.apellido);
+                    },
+                    error: function() {
+                        $('#nombrep').val('');
+                        $('#apellidop').val('');
+                        alert('No se encontró ningún propietario con los datos ingresados.');
+                    }
+                });
+            });
+        });
+        </script>
 
         <div class="col-md-4">
             <h2>Datos visitante:</h2>
@@ -255,8 +277,11 @@
     });
 </script>
 
-
+</div>
 
 </body>
 
 </html>
+
+
+

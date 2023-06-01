@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IPropietario extends JpaRepository<Propietario, Integer> {
 
-
+    List<Propietario> findByTorreAndApartamento(String torre, String apartamento);
 }
