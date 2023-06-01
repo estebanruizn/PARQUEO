@@ -176,19 +176,18 @@
         <div class="col-md-4">
             <h2>Datos visitante:</h2>
             <div class="form-group">
-                <label for="nombrev">Nombre:</label>
-                <input type="text" id="nombrev" class="form-control" name="nombre" required>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" class="form-control" name="nombre" required>
             </div>
             <div class="form-group">
-                <label for="apellidos">Apellido:</label>
-                <input type="text" id="apellidos" class="form-control" name="apellido" required>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" class="form-control" name="apellido" required>
             </div>
             <div class="form-group">
-                <label for="cedula">Cedula:</label>
-                <input type="text" id="cedula" class="form-control" name="cedula" required>
+                <label for="numero_documento">Número de documento:</label>
+                <input type="text" id="numero_documento" class="form-control" name="numero_documento" required>
             </div>
         </div>
-
         <div class="col-md-4">
             <form id="access-form" action="/access2" method="post">
                 <h2>Datos vehiculo:</h2>
@@ -229,6 +228,46 @@
                 </div>
 
             </form>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+$(document).ready(function() {
+  $('#access-form').submit(function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+    // Obtén los valores de los campos del formulario
+    var nombre = $('#nombre').val();
+    var apellido = $('#apellido').val();
+    var numeroDocumento = $('#numero_documento').val();
+
+    // Crea un objeto con los datos a enviar
+    var data = {
+      nombre: nombre,
+      apellido: apellido,
+      numero_documento: numeroDocumento,
+    };
+
+    // Realiza la solicitud AJAX para guardar los datos
+    $.ajax({
+      url: '/parqueo/visitante',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function(response) {
+        // Maneja la respuesta del servidor aquí, si es necesario
+        console.log(response);
+        // Realiza cualquier acción adicional después de guardar los datos
+        alert('Datos guardados exitosamente');
+      },
+      error: function(error) {
+        // Maneja los errores aquí, si es necesario
+        console.error(error);
+        alert('Error al guardar los datos');
+      }
+    });
+  });
+});
+</script>
+
         </div>
     </div>
 
