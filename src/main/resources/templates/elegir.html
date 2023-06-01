@@ -11,6 +11,14 @@
             padding: 20px;
         }
 
+            .seat.available {
+        background-color: green;
+    }
+
+    .seat.occupied {
+        background-color: red;
+    }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -109,21 +117,7 @@
             margin-bottom: 30px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#verificar').click(function() {
-                var torre = $('#torre').val();
-                var apartamento = $('#apa').val();
 
-                // Realizar la solicitud AJAX al controlador para obtener los datos del propietario
-                $.get("/consultar-propietario", { torre: torre, apartamento: apartamento }, function(data) {
-                    $('#nombrep').val(data.nombre);
-                    $('#apellidop').val(data.apellido);
-                });
-            });
-        });
-    </script>
 </head>
 <body>
 <div class="center">
@@ -152,7 +146,7 @@
             </div>
             <div class="form-group">
                 <label for="verificarr">Verificar propietario:</label>
-                <input type="button" id="verificar" class="form-control" name="verificar" value="Verificar" required>
+                <input type="submit" id="boton" class="form-control" name="verificar" value="Verificar" required>
             </div>
         </div>
 
@@ -218,7 +212,7 @@
             <h2 class="schedule-title">Bicicletas</h2>
             <div class="schedule-seats">
                 <div th:each="lugar : ${datos_lugar}" th:if="${#strings.toLowerCase(lugar.lugar.substring(1, 2)) == 'b'}">
-                    <div class="seat" th:text="${lugar.lugar}"></div>
+                    <div class="seat" th:text="${lugar.lugar}" th:attr="data-estado=${lugar.estado}"></div>
                 </div>
             </div>
         </div>
@@ -226,7 +220,7 @@
             <h2 class="schedule-title">Carros</h2>
             <div class="schedule-seats">
                 <div th:each="lugar : ${datos_lugar}" th:if="${#strings.toLowerCase(lugar.lugar.substring(1, 2)) == 'c'}">
-                    <div class="seat" th:text="${lugar.lugar}"></div>
+                    <div class="seat" th:text="${lugar.lugar}" th:attr="data-estado=${lugar.estado}"></div>
                 </div>
             </div>
         </div>
@@ -234,14 +228,35 @@
             <h2 class="schedule-title">Motos</h2>
             <div class="schedule-seats">
                 <div th:each="lugar : ${datos_lugar}" th:if="${#strings.toLowerCase(lugar.lugar.substring(1, 2)) == 'm'}">
-                    <div class="seat" th:text="${lugar.lugar}"></div>
+                    <div class="seat" th:text="${lugar.lugar}" th:attr="data-estado=${lugar.estado}"></div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="center">
-        <button type="submit" class="btn btn-primary">Generar puesto</button>
+        <button type="button" class="btn btn-primary">Asignar puesto</button>
+        <button type="button" class="btn btn-primary">Salida vehiculo</button>
     </div>
-</div>
+
+    <script>
+    // Obtener todos los elementos con la clase "seat"
+    const seats = document.querySelectorAll('.seat');
+
+    // Iterar sobre cada lugar y aplicar la clase correspondiente según su estado
+    seats.forEach(seat => {
+        const estado = seat.dataset.estado;
+
+        if (estado === 'disponible') {
+            seat.classList.add('available');
+        } else if (estado === 'ocupado') {
+            seat.classList.add('occupied');
+        }
+    });
+</script>
+
+
+
 </body>
+
 </html>
