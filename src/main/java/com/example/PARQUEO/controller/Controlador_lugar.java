@@ -23,11 +23,11 @@ public class Controlador_lugar {
         model.addAttribute("cuerpo_lugar","Lugares");
 
         List<Lugar> lug = servlugar.listar_lugar();
-
-
         model.addAttribute("datos_lugar",lug);
         return "lugares";
     }
+
+
     @PostMapping("/guardar_lugar")
     public String Guardarlugar(@ModelAttribute Lugar lug){
 

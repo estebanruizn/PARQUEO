@@ -12,7 +12,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             background-color: #f2f2f2;
             padding: 20px;
@@ -61,18 +61,23 @@
             height: auto;
         }
 
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.button-container button {
+  font-size: 14px;
+  margin-right: 10px; /* Margen a la derecha entre los botones */
+}
+
 
         #errorLabel {
             color: red;
         }
 
         .schedule-column {
-            flex: 1;
             margin-bottom: 30px;
         }
 
@@ -100,6 +105,10 @@
         .seat.selected {
             background-color: #90EE90;
         }
+
+        .row {
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
@@ -109,8 +118,49 @@
 <div class="container">
     <h1>Asignación de Parqueadero</h1>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <label for="nombre">Datos propietario:</label>
+            <div class="form-group">
+                <label for="torre">Torre:</label>
+                <input type="text" id="torre" class="form-control" name="torre" required>
+            </div>
+            <div class="form-group">
+                <label for="apa">Apartamento:</label>
+                <input type="text" id="apa" class="form-control" name="apa" required>
+            </div>
+            <div class="form-group">
+                <label for="nombrep">Nombre:</label>
+                <input type="text" id="nombrep" class="form-control" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellidop">Apellido:</label>
+                <input type="text" id="apellidop" class="form-control" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="verificarr">Verificar propietario:</label>
+                <input type="submit" id="boton" class="form-control" name="verificar" value="Verificar" required>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label for="nombre">Datos visitante:</label>
+            <div class="form-group">
+                <label for="nombrev">Nombre:</label>
+                <input type="text" id="nombrev" class="form-control" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellidos">Apellido:</label>
+                <input type="text" id="apellidos" class="form-control" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="cedula">Cedula:</label>
+                <input type="text" id="cedula" class="form-control" name="cedula" required>
+            </div>
+        </div>
+
+        <div class="col-md-4">
             <form id="access-form" action="/access2" method="post">
+                <label for="color">Datos vehiculo:</label>
                 <div class="form-group">
                     <label for="color">Color:</label>
                     <input type="text" id="color" class="form-control" name="color" required>
@@ -123,113 +173,65 @@
                     <label for="placa">Placa:</label>
                     <input type="text" id="placa" class="form-control" name="placa" required>
                 </div>
+
                 <div class="form-group">
                     <label for="celador">Celador:</label>
                     <select id="celador" class="form-control" name="celador" required>
-                        <option value="">Selecciona el celador</option>
+                        <option value="">Seleccione el celador</option>
                         <option th:each="celador : ${datos_celador}" th:value="${celador.id_celador}" th:text="${celador.apellido}"></option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="tipo_vehiculo">Tipo de vehículo:</label>
                     <select id="tipo_vehiculo" class="form-control" name="tipo_vehiculo" required>
-                        <option value="">Selecciona un tipo de vehículo</option>
+                        <option value="">Selecciona el tipo de vehículo</option>
                         <option th:each="tipo : ${datos_tipo_vehiculo}" th:value="${tipo.id_tipovehiculo}" th:text="${tipo.tipo_vehiculo}"></option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="lugar">Lugar:</label>
+                    <input type="text" id="lugar" class="form-control" name="lugar" required>
                 </div>
                 <label id="errorLabel"></label>
                 <div class="button-container">
                     <button type="submit" class="btn btn-primary">Acceder</button>
                     <button onclick="window.history.back()" class="btn btn-secondary">Retroceder</button>
+                    <button type="submit" class="btn btn-primary">Generar puesto</button>
+
                 </div>
             </form>
         </div>
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-4 schedule-column">
-                    <h2 class="schedule-title">Bicicleta</h2>
-                    <div class="schedule-seats">
-                        <div class="seat">B1</div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 schedule-column">
+            <h2 class="schedule-title">Bicicletas</h2>
+            <div class="schedule-seats">
+                <div th:each="lugar : ${datos_lugar}" th:if="${#strings.toLowerCase(lugar.lugar.substring(1, 2)) == 'b'}">
+                    <div class="seat" th:text="${lugar.lugar}"></div>
                 </div>
-                <div class="col-md-4 schedule-column">
-                    <h2 class="schedule-title">Moto</h2>
-                    <div class="schedule-seats">
-                        <!-- Aquí va la interfaz tipo cine para motos -->
-                        <!-- Puedes agregar lógica adicional para mostrar los asientos disponibles -->
-                        <!-- Ejemplo de asiento seleccionado: <div class="seat selected"></div> -->
-                        <!-- Ejemplo de asiento disponible: <div class="seat"></div> -->
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 schedule-column">
+            <h2 class="schedule-title">Carros</h2>
+            <div class="schedule-seats">
+                <div th:each="lugar : ${datos_lugar}" th:if="${#strings.toLowerCase(lugar.lugar.substring(1, 2)) == 'c'}">
+                    <div class="seat" th:text="${lugar.lugar}"></div>
                 </div>
-                <div class="col-md-4 schedule-column">
-                    <h2 class="schedule-title">Carro</h2>
-                    <div class="schedule-seats">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 schedule-column">
+            <h2 class="schedule-title">Motos</h2>
+            <div class="schedule-seats">
+                <div th:each="lugar : ${datos_lugar}" th:if="${#strings.toLowerCase(lugar.lugar.substring(1, 2)) == 'm'}">
+                    <div class="seat" th:text="${lugar.lugar}"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

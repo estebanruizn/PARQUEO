@@ -1,6 +1,7 @@
 package com.example.PARQUEO.controller;
 
 import com.example.PARQUEO.Model.Celador;
+import com.example.PARQUEO.Model.Tipo_vehiculo;
 import com.example.PARQUEO.impservice.ICeladorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,19 @@ public class Controlador_celador {
         List<Celador> cela = servcelador.listar_celador();
         model.addAttribute("datos_celador", cela);
         return "GestCelador";
+    }
+
+    @GetMapping("/elegirr")
+
+    public String listar_tipo_vehiculo(Model model){
+
+        model.addAttribute("titulo_celador","CELADORES");
+        model.addAttribute("cuerpo_celadores","Celadores");
+
+        List<Celador> cela = servcelador.listar_celador();
+
+        model.addAttribute("datos_celador", cela);
+        return "elegirr";
     }
 
 
