@@ -214,7 +214,9 @@
                     <label for="tipo_vehiculo">Tipo de vehículo:</label>
                     <select id="tipo_vehiculo" class="form-control" name="tipo_vehiculo" required>
                         <option value="">Selecciona el tipo de vehículo</option>
-                        <option th:each="tipo : ${datos_tipo_vehiculo}" th:value="${tipo.id_tipovehiculo}" th:text="${tipo.tipo_vehiculo}"></option>
+                        <option value="carro">Carro</option>
+                        <option value="bicicleta">Bicicleta</option>
+                        <option value="moto">Moto</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -304,17 +306,53 @@ $(document).ready(function() {
         <button type="button" id="salidaVehiculoBtn" class="btn btn-primary">Salida vehiculo</button>
     </div>
     <script>
-    document.getElementById("btnAsignarPuesto").addEventListener("click", function() {
-        // Obtener los lugares disponibles para asignar
-        var lugaresDisponibles = document.getElementsByClassName("seat");
-        // Generar un índice aleatorio para seleccionar un lugar
-        var indiceAleatorio = Math.floor(Math.random() * lugaresDisponibles.length);
-        // Obtener el lugar asignado
-        var lugarAsignado = lugaresDisponibles[indiceAleatorio].innerText;
-        // Asignar el lugar al campo correspondiente
-        document.getElementById("lugar").value = lugarAsignado;
-    });
+document.getElementById("btnAsignarPuesto").addEventListener("click", function() {
+    var tipoVehiculo = $('#tipo_vehiculo').val();
+    console.log("Tipo de vehículo seleccionado: " + tipoVehiculo);
+
+    var areasAsientos = {
+        'carro': ['VC1', 'VC2', 'VC3', 'VC4', 'VC5', 'VC6', 'VC7', 'VC8', 'VC9', 'VC10', 'VC11', 'VC12', 'VC13', 'VC14', 'VC15', 'VC16', 'VC17', 'VC18', 'VC19', 'VC20'],
+        'bicicleta': ['VB1', 'VB2', 'VB3', 'VB4', 'VB5', 'VB6', 'VB7', 'VB8', 'VB9', 'VB10', 'VB11', 'VB12', 'VB13', 'VB14', 'VB15', 'VB16', 'VB17', 'VB18', 'VB19', 'VB20'],
+        'moto': ['VM1', 'VM2', 'VM3', 'VM4', 'VM5', 'VM6', 'VM7', 'VM8', 'VM9', 'VM10', 'VM11', 'VM12', 'VM13', 'VM14', 'VM15', 'VM16', 'VM17', 'VM18', 'VM19', 'VM20']
+    };
+
+    if (tipoVehiculo in areasAsientos) {
+        var asientosDisponibles = areasAsientos[tipoVehiculo];
+        console.log("Asientos disponibles: " + asientosDisponibles);
+
+        // Filtrar los asientos disponibles
+        var asientosDisponiblesNoOcupados = asientosDisponibles.filter(function(asiento) {
+            var asientoHTML = document.querySelector('.seat[data-estado="ocupado"][th-text="' + asiento + '"]');
+            return !asientoHTML; // Si no encuentra el asiento en la lista de ocupados, está disponible
+        });
+
+        if (asientosDisponiblesNoOcupados.length > 0) {
+            // Generar un índice aleatorio para seleccionar un asiento
+            var indiceAleatorio = Math.floor(Math.random() * asientosDisponiblesNoOcupados.length);
+
+            // Obtener el asiento asignado
+            var asientoAsignado = asientosDisponiblesNoOcupados[indiceAleatorio];
+
+            // Asignar el asiento al campo correspondiente
+            document.getElementById("lugar").value = asientoAsignado;
+        } else {
+            alert('No hay asientos disponibles para ' + tipoVehiculo + 's.');
+        }
+    } else {
+        alert('Seleccione un tipo de vehículo válido para asignar un lugar de estacionamiento.');
+    }
+});
+
+
 </script>
+
+
+</script>
+
+
+
+
+    </script>
 
 
 
