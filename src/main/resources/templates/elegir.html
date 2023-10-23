@@ -232,6 +232,7 @@
             </form>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
+<script>
 $(document).ready(function() {
   $('#access-form').submit(function(event) {
     event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
@@ -240,12 +241,24 @@ $(document).ready(function() {
     var nombre = $('#nombre').val();
     var apellido = $('#apellido').val();
     var numeroDocumento = $('#numero_documento').val();
+    var color = $('#color').val();
+    var modelo = $('#modelo').val();
+    var placa = $('#placa').val();
+    var celador = $('#celador').val();
+    var tipoVehiculo = $('#tipo_vehiculo').val();
+    var lugar = $('#lugar').val(); // Asegúrate de que se ingrese o se asigne el lugar
 
     // Crea un objeto con los datos a enviar
     var data = {
       nombre: nombre,
       apellido: apellido,
       numero_documento: numeroDocumento,
+      color: color,
+      modelo: modelo,
+      placa: placa,
+      celador: celador,
+      tipo_vehiculo: tipoVehiculo,
+      lugar: lugar // Asegúrate de que el lugar se incluya en los datos
     };
 
     // Realiza la solicitud AJAX para guardar los datos
@@ -268,6 +281,8 @@ $(document).ready(function() {
     });
   });
 });
+</script>
+
 </script>
 
         </div>
